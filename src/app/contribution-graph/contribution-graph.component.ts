@@ -9,12 +9,14 @@ export class ContributionGraphComponent implements OnInit {
 
   @Input() startDate: string;
   colNumber = 53;
-  columns = Array.from(Array(this.colNumber).keys());
+  columns: Array<number>;
+  days: Array<string>;
 
   constructor() { }
 
   ngOnInit() {
-
+    this.columns = Array.from(Array(this.colNumber).keys());
+    this.days = this.computeDayLabels(this.startDate);
   }
 
   calcYearDays() {
@@ -43,6 +45,26 @@ export class ContributionGraphComponent implements OnInit {
       row = this.lastRow();
     }
     return Array.from(Array(row).keys());
+  }
+
+  computeDayLabels(startDateString: string) {
+    const dayTable = [
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat'
+    ];
+    const days = [];
+    const startDate = new Date(startDateString);
+    const startDay = startDate.getDay(); // Sunday - Saturday : 0 - 6
+    for (let i = 0; i < 4; i++) {
+      const mIndex = (startDay + i * 2) % 7;
+      days[i] = dayTable[mIndex];
+    }
+    return days;
   }
 
 }
