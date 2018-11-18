@@ -22,4 +22,10 @@ describe('ContributionGraphComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should compute and return the weekdays', () => {
+    const startDate = '2018-12-18';
+    const days = component.calcDays(startDate);
+    expect(days).toEqual(['Tue', 'Thu', 'Sat', 'Mon']);
+  });
 });

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { deflateSync } from 'zlib';
 
 @Component({
   selector: 'ng2-contribution-graph',
