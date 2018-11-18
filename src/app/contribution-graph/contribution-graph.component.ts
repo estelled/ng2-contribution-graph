@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { deflateSync } from 'zlib';
 
 @Component({
   selector: 'ng2-contribution-graph',
@@ -17,7 +16,7 @@ export class ContributionGraphComponent implements OnInit {
 
   ngOnInit() {
     this.columns = Array.from(Array(this.colNumber).keys());
-    this.days = this.calcDays(this.startDate);
+    this.days = this.computeDayLabels(this.startDate);
   }
 
   calcYearDays() {
@@ -48,7 +47,7 @@ export class ContributionGraphComponent implements OnInit {
     return Array.from(Array(row).keys());
   }
 
-  calcDays(startDateString: string) {
+  computeDayLabels(startDateString: string) {
     const dayTable = [
       'Sun',
       'Mon',
@@ -65,7 +64,6 @@ export class ContributionGraphComponent implements OnInit {
       const mIndex = (startDay + i * 2) % 7;
       days[i] = dayTable[mIndex];
     }
-    console.log(days);
     return days;
   }
 
