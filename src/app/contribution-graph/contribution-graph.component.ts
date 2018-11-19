@@ -67,4 +67,29 @@ export class ContributionGraphComponent implements OnInit {
     return days;
   }
 
+  index2month(i: number) {
+    const monthTable = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+    const id = this.idCalc(i, 1); // always first row
+    const date = new Date(this.startDate);
+    date.setDate(date.getDate() + id);
+    const idTable = date.getMonth(); // 0-11
+    return monthTable[idTable];
+  }
+
+  idCalc(i: number, j: number) {
+    return (i - 1) * 7 + j - 1;
+  }
 }

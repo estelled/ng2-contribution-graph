@@ -12,13 +12,24 @@
         font-size: 11px;
         color: #414660;
         margin-right: 10px;
-        //margin-top: 20px; for later, after month will be displayed
+        margin-top: 15px;
     }
 
     #canvas {
         display: flex;
         flex-direction: row;
 
+        .month {
+            font-size: 11px;
+            color: #414660;
+            width: 10px;
+            margin-bottom: 5px;
+          }
+        .empty {
+            margin-bottom: 12px;
+            color:transparent;
+            border: solid transparent;
+        }
         .circle {
             width: 11px;
             height: 11px;
