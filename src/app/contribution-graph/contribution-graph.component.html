@@ -1,20 +1,15 @@
 <div id="container">
-  <div id="day-column">
-    <div *ngFor="let day of days">{{ day }}</div>
-  </div>
   <div id="canvas">
+    <div class="day-column">
+      <div *ngFor="let day of days">{{ day }}</div>
+    </div>
       <div *ngFor="let col of columns">
-          <div *ngIf="col == 1  && index2month(col) == index2month(col+1) || index2month(col) != index2month(col-1) ; else elseBlock">
-            <div class="month">{{ index2month(col) }}</div>
-          </div>
-          <ng-template #elseBlock><div class="empty"></div></ng-template>
+            <div [className]="monthChanged(col) ? 'month-label' :  'empty-label'">
+              {{ monthChanged(col) ? index2month(col) : null }}
+            </div>
         <div class="graph-row" *ngFor="let row of numRow(col)">
           <div class="circle" ngbTooltip="{{ computeTooltipText(col, row) }}"></div>
         </div>
       </div>
   </div>
 </div>
-
-
-
- {{ activityDict | json }}

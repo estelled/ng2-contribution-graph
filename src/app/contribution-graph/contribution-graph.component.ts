@@ -22,6 +22,12 @@ export class ContributionGraphComponent implements OnInit {
     this.activityDict = this.activity2activityDict(this.activity);
   }
 
+  monthChanged(col: number) {
+    const first =  col === 0  && this.index2month(col) === this.index2month(col + 1);
+    const changed = this.index2month(col) !== this.index2month(col - 1);
+    return first || changed;
+  }
+
   calcYearDays() {
     const startDate = new Date(this.startDate);
     const day = startDate.getDate();
@@ -114,12 +120,12 @@ export class ContributionGraphComponent implements OnInit {
     return text;
   }
 
-  activity2activityDict(activity: any[]) {
+  activity2activityDict(activityTable: any[]) {
     const activityDict = {};
-    for (let i = 0; i < activity.length; i++) {
-      const tempDate = new Date(activity[i][0]);
+    for (const activity of activityTable) {
+      const tempDate = new Date(activity[0]);
       const key = tempDate.toDateString();
-      activityDict[key] = activity[i][1];
+      activityDict[key] = activity[1];
     }
     return activityDict;
   }
