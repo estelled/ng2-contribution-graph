@@ -69,9 +69,13 @@ export class ContributionGraphComponent implements OnInit {
     const days = [];
     const startDate = new Date(startDateString);
     const startDay = startDate.getDay(); // Sunday - Saturday : 0 - 6
-    for (let i = 0; i < 4; i++) {
-      const mIndex = (startDay + i * 2) % 7;
-      days[i] = dayTable[mIndex];
+    for (let i = 0; i < 7; i++) {
+      const day = dayTable[(startDay + i) % 7];
+      if  (i % 2 === 0) {
+        days.push(day);
+      } else {
+        days.push(null);
+      }
     }
     return days;
   }

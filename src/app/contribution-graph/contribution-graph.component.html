@@ -1,7 +1,8 @@
 <div id="container">
   <div id="canvas">
     <div class="day-column">
-      <div *ngFor="let day of days">{{ day }}</div>
+      <div class="month-label"></div>
+      <div *ngFor="let day of days" class="day-label">{{ day }}</div>
     </div>
       <div *ngFor="let col of columns">
             <div class='month-label'>
