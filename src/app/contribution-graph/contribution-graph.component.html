@@ -9,10 +9,12 @@
           </div>
           <ng-template #elseBlock><div class="empty"></div></ng-template>
         <div class="graph-row" *ngFor="let row of numRow(col)">
-          <div class="circle"></div>
+          <div class="circle" ngbTooltip="{{ computeTooltipText(col, row) }}"></div>
         </div>
       </div>
   </div>
 </div>
 
 
+
+ {{ activityDict | json }}

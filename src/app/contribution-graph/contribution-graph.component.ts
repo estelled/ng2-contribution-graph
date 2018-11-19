@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'ng2-contribution-graph',
   templateUrl: './contribution-graph.component.html',
@@ -8,15 +9,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ContributionGraphComponent implements OnInit {
 
   @Input() startDate: string;
+  @Input() activity: any[];
   colNumber = 53;
   columns: Array<number>;
   days: Array<string>;
-
+  activityDict: {};
   constructor() { }
 
   ngOnInit() {
     this.columns = Array.from(Array(this.colNumber).keys());
     this.days = this.computeDayLabels(this.startDate);
+    this.activityDict = this.activity2activityDict(this.activity);
   }
 
   calcYearDays() {
@@ -92,4 +95,33 @@ export class ContributionGraphComponent implements OnInit {
   idCalc(i: number, j: number) {
     return (i - 1) * 7 + j - 1;
   }
+
+  id2date(id: number) {
+    const result = new Date(this.startDate);
+    result.setDate(result.getDate() + id);
+    return result.toDateString();
+  }
+
+  computeTooltipText(i: number, j: number) {
+    const id =  this.idCalc(i, j);
+    const date = this.id2date(id);
+    let contNumber = 'no';
+    if (this.activityDict[date]) {
+      contNumber = this.activityDict[date];
+    }
+    const text = contNumber + ' contributions on ' + date;
+
+    return text;
+  }
+
+  activity2activityDict(activity: any[]) {
+    const activityDict = {};
+    for (let i = 0; i < activity.length; i++) {
+      const tempDate = new Date(activity[i][0]);
+      const key = tempDate.toDateString();
+      activityDict[key] = activity[i][1];
+    }
+    return activityDict;
+  }
+
 }
