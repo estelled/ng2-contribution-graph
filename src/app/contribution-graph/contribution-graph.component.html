@@ -4,7 +4,7 @@
       <div *ngFor="let day of days">{{ day }}</div>
     </div>
       <div *ngFor="let col of columns">
-            <div [className]="monthChanged(col) ? 'month-label' :  'empty-label'">
+            <div class='month-label'>
               {{ monthChanged(col) ? index2month(col) : null }}
             </div>
         <div class="graph-row" *ngFor="let row of numRow(col)">
