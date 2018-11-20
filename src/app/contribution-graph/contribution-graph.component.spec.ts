@@ -28,4 +28,11 @@ describe('ContributionGraphComponent', () => {
     const days = component.computeDayLabels(startDate);
     expect(days).toEqual(['Tue', 'Thu', 'Sat', 'Mon']);
   });
+
+  it('should compute and return the fisrt month displayed ', () => {
+    component.startDate = '2018-12-18';
+    const month = component.index2month(0);
+    expect(month).toEqual('Dec');
+  });
+
 });
