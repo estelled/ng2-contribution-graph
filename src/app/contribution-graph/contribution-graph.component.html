@@ -9,7 +9,11 @@
               {{ monthChanged(col) ? index2month(col) : null }}
             </div>
         <div class="graph-row" *ngFor="let row of numRow(col)">
-          <div class="circle" ngbTooltip="{{ computeTooltipText(col, row) }}"></div>
+          <div
+            class="circle" 
+            [style.backgroundColor]="circleColor(col, row)"
+            [ngbTooltip]="computeTooltipText(col, row)">
+          </div>
         </div>
       </div>
   </div>

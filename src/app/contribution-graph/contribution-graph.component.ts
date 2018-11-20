@@ -10,11 +10,11 @@ export class ContributionGraphComponent implements OnInit {
 
   @Input() startDate: string;
   @Input() activity: any[];
+  @Input() colorScheme: string[];
   colNumber = 53;
-  columns: Array<number>;
-  days: Array<string>;
+  columns: number[];
+  days: string[];
   activityDict: {};
-  constructor() { }
 
   ngOnInit() {
     this.columns = Array.from(Array(this.colNumber).keys());
@@ -28,13 +28,16 @@ export class ContributionGraphComponent implements OnInit {
     return first || changed;
   }
 
-  calcYearDays() {
-    const startDate = new Date(this.startDate);
+  getEndDate(startDate: Date) {
     const day = startDate.getDate();
     const month = startDate.getMonth();
     const year = startDate.getFullYear() + 1;
+    return new Date(year, month, day);
+  }
 
-    const endDate = new Date(year, month, day);
+  calcYearDays() {
+    const startDate = new Date(this.startDate);
+    const endDate = this.getEndDate(startDate);
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const days = Math.round(
       Math.abs((endDate.getTime() - startDate.getTime()) / oneDay)
@@ -132,6 +135,62 @@ export class ContributionGraphComponent implements OnInit {
       activityDict[key] = activity[1];
     }
     return activityDict;
+  }
+
+
+  filterActivity(activity: any[]) {
+    const activityFiltered = [];
+    const startDate = new Date(this.startDate);
+    const endDate = this.getEndDate(startDate);
+    for (const [sDate, contNumber] of activity) {
+      const date = new Date(sDate);
+      if (date > startDate && date < endDate) {
+        activityFiltered.push([sDate, contNumber]);
+      }
+    }
+    return activityFiltered;
+  }
+  getTotalActivity(activity: any[]) {
+    // returns sum of all the contribution of the  *ONGOING* year
+    const activityFiltered = this.filterActivity(activity);
+    let totalActivity = 0;
+    for (const [key, contNumber] of activityFiltered) {
+      totalActivity += +contNumber;
+    }
+    return totalActivity;
+  }
+
+  getValue(activityCount: number) {
+    const totalActivityCount = this.getTotalActivity(this.activity);
+    if (totalActivityCount === 0 || activityCount === 0) {
+      return 0;
+    }
+    const ratio = activityCount / totalActivityCount * 100;
+    let value = 0;
+    if (ratio < 25) {
+      value = 1;
+    } else if (ratio < 50) {
+      value = 2;
+    } else if (ratio < 75) {
+      value = 3;
+    } else {
+      value = 4;
+    }
+    return value;
+  }
+
+
+  circleColor(i: number, j: number) {
+    const colorTable = this.colorScheme;
+    const id =  this.idCalc(i, j);
+    const date = this.id2date(id);
+    let activityCount = 0;
+    if (this.activityDict[date]) {
+      activityCount = this.activityDict[date];
+    }
+    const value = this.getValue(activityCount);
+    const  backgroundColor = colorTable[value];
+    return backgroundColor;
   }
 
 }
