@@ -116,8 +116,7 @@ export class ContributionGraphComponent implements OnInit {
   }
 
   computeTooltipText(i: number, j: number) {
-    const id =  this.idCalc(i, j);
-    const date = this.id2date(id);
+    const date = this.getDate(i, j);
     let contNumber = 'no';
     if (this.activityDict[date]) {
       contNumber = this.activityDict[date];
@@ -166,31 +165,33 @@ export class ContributionGraphComponent implements OnInit {
       return 0;
     }
     const ratio = activityCount / totalActivityCount * 100;
-    let value = 0;
+    let value = 4;
     if (ratio < 25) {
       value = 1;
     } else if (ratio < 50) {
       value = 2;
     } else if (ratio < 75) {
       value = 3;
-    } else {
-      value = 4;
     }
     return value;
   }
 
 
   circleColor(i: number, j: number) {
-    const colorTable = this.colorScheme;
-    const id =  this.idCalc(i, j);
-    const date = this.id2date(id);
+    const date = this.getDate(i, j);
     let activityCount = 0;
     if (this.activityDict[date]) {
       activityCount = this.activityDict[date];
     }
     const value = this.getValue(activityCount);
-    const  backgroundColor = colorTable[value];
+    const  backgroundColor = this.colorScheme[value];
     return backgroundColor;
+  }
+
+  getDate(i: number, j: number) {
+    const id = this.idCalc(i, j);
+    const date = this.id2date(id);
+    return date;
   }
 
 }
