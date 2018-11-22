@@ -5,6 +5,7 @@
 .legend {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     .circle {
         width: 10px;
         height: 10px;
