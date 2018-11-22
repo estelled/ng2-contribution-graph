@@ -2,15 +2,15 @@
   <div id="canvas">
     <div class="day-column">
       <div class="month-label"></div>
-      <div *ngFor="let day of days" class="day-label">{{ day }}</div>
+      <div *ngFor="let day of days" class="day-label unit-size label-font">{{ day }}</div>
     </div>
       <div *ngFor="let col of columns">
-            <div class='month-label'>
+            <div class="month-label unit-size label-font">
               {{ monthChanged(col) ? index2month(col) : null }}
             </div>
         <div class="graph-row" *ngFor="let row of numRow(col)">
           <div
-            class="circle" 
+            class="circle unit-size" 
             [style.backgroundColor]="circleColor(col, row)"
             [ngbTooltip]="computeTooltipText(col, row)">
           </div>
