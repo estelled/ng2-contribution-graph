@@ -4,6 +4,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { ContributionGraphComponent } from './contribution-graph/contribution-graph.component';
+import { ColorLegendComponent } from './color-legend/color-legend.component';
 
 
 
@@ -11,6 +12,7 @@ import { ContributionGraphComponent } from './contribution-graph/contribution-gr
   declarations: [
     AppComponent,
     ContributionGraphComponent,
+    ColorLegendComponent,
   ],
   imports: [
     BrowserModule,
