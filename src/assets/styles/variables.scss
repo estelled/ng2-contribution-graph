@@ -1,0 +1,16 @@
+.unit-size {
+    width: 10px;
+    height: 10px;
+    }
+
+.label-font {
+    color: #414660;
+    font-size: 10px;
+}
+
+.circle {
+    @extend .unit-size;
+    border-radius: 50%;
+    background-color: #ebedf0;
+    margin: 1px;
+}

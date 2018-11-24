@@ -1,22 +1,12 @@
-//  @Arnaud: this class is duplicated in contribution-graph component.
-//  Where should it be placed to be usable in both components ?
-
+@import "../../assets/styles/variables.scss";
 
 .legend {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    .circle {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #ebedf0;
-        margin: 1px;
-    }
-    //CSS REFACTO NEEDED: common use with contribution-graph
+
     .label {
-        color: #414660;
-        font-size: 10px;
+        @extend .label-font;
         margin-left: 5px;
         margin-right: 5px;
     }
