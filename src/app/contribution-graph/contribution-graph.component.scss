@@ -1,17 +1,18 @@
 
 #container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     #canvas {
         display: flex;
         flex-direction: row;
+        color: #414660;
+        margin-bottom: 15px;
 
         .day-column {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            color: #414660;
+            justify-content: space-between;  
             margin: -2px 15px 3px 4px;
             .day-label {
                 font-size: 10px;
@@ -23,7 +24,6 @@
 
         .month-label {
             font-size: 10px;
-            color: #414660;
             width: 10px;
             height: 10px;
             overflow: visible;
