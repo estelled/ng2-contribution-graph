@@ -1,12 +1,13 @@
+@import "../../assets/styles/variables.scss";
 
 #container {
     display: flex;
     flex-direction: column;
 
     #canvas {
+        @extend .label-font;
         display: flex;
         flex-direction: row;
-        // color: #414660;
         margin-bottom: 15px;
 
         .day-column {
@@ -15,28 +16,16 @@
             justify-content: space-between;  
             margin: -2px 15px 3px 4px;
             .day-label {
-                // font-size: 10px;
-                // height: 10px;
-                // width: 10px;
+                @extend .unit-size;
                 text-align: center;
             }
         }
 
         .month-label {
-            // font-size: 10px;
-            // width: 10px;
-            // height: 10px;
+            @extend .unit-size;
             overflow: visible;
             margin-bottom: 10px;
           }
-        .circle {
-            // font-size: 10px;
-            // width: 10px;
-            // height: 10px;
-            border-radius: 50%;
-            background-color: #ebedf0;
-            margin: 1px;
-        }
     }
 
 }
